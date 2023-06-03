@@ -1,0 +1,229 @@
+.marker {
+    background-image: url('../images/hostmarker.svg');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.currentmarker {
+    background-image: url('../images/currentmarker.svg');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mapboxgl-popup-close-button {
+    display: none;
+}
+
+.mapboxgl-popup-content {
+    padding: 1px;
+    width: 180px;
+    margin: auto;
+    background-color: #FFFFFF;
+    color: #464648;
+    border-top: 6px solid #1DBF73;
+    border-radius: 10px;
+    text-align: center;
+    
+}
+
+.host-marker-img {
+    width: auto;
+    height: 44px;
+    margin-right: 5px;
+    margin-left: 0;
+    float: left;
+}
+
+.host-marker-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.host-marker-stars {
+    font-size: 12px;
+    color: #F05A29;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+#map-drawer {
+    display: none;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+    height: 256px;
+    background-color: #FFFFFF;
+    transition: height 0.5s ease;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    max-height: calc(100vh - 84px);
+}
+
+#map-wrapper {
+    width: 100%;
+    height: calc(100vh - 84px);
+    background-color: #FFFFFF;
+}
+
+.ui-button-custom {
+    font-size: 18pt;
+    color: #464648;
+    padding: 4px;
+    margin: 4px;
+    top: 4px;
+    cursor: pointer;
+    position: absolute;
+    display: block;
+}
+
+#map-drawer-close-button {
+    right: 0px;
+}
+
+#map-drawer-text-wrapper {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0px 10%;    
+    overflow: auto;
+}
+
+#map-drawer-charger-name {
+    font-weight: 700;
+    font-size: 16pt;
+    border-bottom: 1px solid #464648;
+    margin: 8px auto 8px;
+}
+
+#map-drawer-text-row {
+    display: block;
+    width: 100%;
+    margin: 4px 8px;
+}
+
+.map-drawer-text-left {
+    float: left;
+    font-weight: 500;
+}
+
+.map-drawer-text-right {
+    float: right;
+}
+
+#map-drawer-details-wrapper {
+    display: none;
+    max-height: 120px;
+    /* word-break: break-word; */
+}
+.time-slot-button {
+    background-color: #e9e9e9;
+    font-size: 12pt;
+    width: 80%;
+    border-radius: 8px;
+    border: 0px;
+    padding: 8px 16px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+.time-slot-button:hover {
+    background-color: #CCCCCC;
+}
+.button-selected {
+	background-image: linear-gradient(#189b5d, #1ec778);
+    color: white;
+}
+
+.button-selected:hover {
+    background-image: linear-gradient(#168a54, #1cb36c);
+}
+
+#ui-datepicker-div {
+    transform: translateX(calc(50vw - 50%));
+    left: 0px !important;
+}
+
+#datepicker {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: grey;
+}
+
+#datepicker:hover {
+    background-color: #e9e9e9;
+}
+
+#popup-time-slots {
+    overflow: auto;
+    margin-bottom: 14px;
+}
+
+
+#booking-confirmation-text, #booking-finish-text {
+    font-size: 1.25rem;
+}
+
+.map-side-expanded {
+    width: initial;
+    max-width: 100%;
+    height: 100% !important;
+} 
+
+#request-booking-button {
+    display: unset;
+}
+
+#reviews-button {
+    cursor: pointer;
+}
+
+#reviews-button:hover {
+    text-decoration: underline;
+}
+.card-text-sm {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media only screen and (min-width: 769px) {
+    #map-drawer-text-wrapper {
+        padding-top: 8px;
+    }
+
+    .map-side-expanded {
+        height: calc(100vh - 78px) !important;
+    }
+
+    #map-drawer {
+        width: 368px;
+        height: calc(100vh - 78px);
+        transition: width 0.5s ease;
+    }
+
+    #map-drawer-expansion-button {
+        display: none;
+    }
+
+    #map-drawer-close-button {
+        right: 32px;
+        top: 8px;
+    }
+
+    #map-drawer-details-wrapper {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .card-panel {
+        max-width: initial !important;
+    }
+}

@@ -1,0 +1,270 @@
+<div id="map-wrapper">
+    <!-- Map Script and Style Imports -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.css' type='text/css' />
+    <style>
+        .geocoder {
+        position:absolute;
+        z-index: 1;
+        width: 340px;
+        left: 50%;
+        margin-left: -170px;
+        top: 20px;
+        visibility: hidden;
+        }
+        .mapboxgl-ctrl-geocoder { min-width:100%; }
+    </style>
+
+    <!-- Div for map elements -->
+    <div id='map'></div>
+    <div id='geocoder' class='geocoder'></div>
+
+    <script>
+        // MapBox API Access Token
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXBhdTg4IiwiYSI6ImNqdjhyemQwNDAzM3U0MnJ5bW9ndHI4bXoifQ.JjTAqjq-WeON4_zK7naPEw';
+
+        // Creates a new map and style, with starting location in Vancouver
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+            center: [-123.116226, 49.246292], // starting position [lng, lat]
+            zoom: 11 // starting zoom
+        });
+
+        var geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            flyTo: {
+            bearing: 0,
+            // These options control the flight curve, making it move
+            // slowly and zoom out almost completely before starting
+            // to pan.
+            speed: 1.5, // make the flying slow
+            curve: 1.5, // change the speed at which it zooms out
+            pitch: 0,
+            // This can be any easing function: it takes a number between
+            // 0 and 1 and returns another number between 0 and 1.
+            easing: function (t) { return t; }
+            },
+            mapboxgl: mapboxgl
+        });
+
+        document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+        // Declares default long and lat variables to be used
+        let long = undefined
+        let lat = undefined 
+
+        // Function that retrieves current location using HTML5 from the browser
+        const defaultPosition = () => {
+            navigator.geolocation.getCurrentPosition((position) => {
+                lat = position.coords.latitude
+                long = position.coords.longitude
+                map.flyTo({
+                    center: [long, lat],
+                    zoom: 13
+                });
+
+            // Create a HTML element for current location
+            var el = document.createElement('div');
+            el.className = 'currentmarker';
+
+            // Make a marker for the current location and add to map
+            new mapboxgl.Marker(el)
+                .setLngLat([long, lat])
+                .addTo(map);
+            })
+        }
+
+        // Fires the default location function which moves the map to the current location.
+        defaultPosition();
+
+        // Renders the markers on the map
+        const renderMarkers = (geojson) => {
+
+            map.on('load', function () {
+
+                // Adds a layer showing the geo markers
+                map.addLayer({
+                    "id": "places",
+                    "type": "symbol",
+                    "source": {
+                        "type": "geojson",
+                        "data": {
+                            "type": "FeatureCollection",
+                            "features": geojson
+                        }
+                    },
+                    "layout": {
+                        "icon-image": "{icon}-15",
+                        "icon-allow-overlap": true
+                    }
+                });
+
+                // When a click event occurs on a feature in the places layer, open a popup at the
+                // location of the feature, with description HTML from its properties.
+                map.on('click', 'places', function (e) {
+                    let coordinates = e.features[0].geometry.coordinates.slice();
+                    let name = e.features[0].properties.name;
+                    let rating = e.features[0].properties.rating;
+                    let html = undefined
+
+                    // Ensure that if the map is zoomed out such that multiple
+                    // copies of the feature are visible, the popup appears
+                    // over the copy being pointed to.
+                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                    }
+
+                    // Customizes the center when a marker is clicked depending on device.
+                    let yoffset = 0
+                    let xoffset = 0
+                    let pitchset = 0
+
+                    if (window.innerWidth < 962){
+                        yoffset = 0.00125
+                    } else {
+                        xoffset = 0.00625
+                        pitchset = 60
+                    }
+
+                    map.flyTo({
+                        center: [coordinates[0] - xoffset, coordinates[1] - yoffset],
+                        zoom: 14,
+                        bearing: 0,
+                        speed: 1.5,
+                        pitch: pitchset,
+                        
+                        // This can be any easing function: it takes a number between
+                        // 0 and 1 and returns another number between 0 and 1.
+                        easing: function (t) { return t; }
+                    });
+
+                    // This function builds the number of stars a charger has based on ratings from the db.
+                    const buildStars = (rating) => {
+                        if (rating === 0) {
+                            html = '<img class="host-marker-img" src="../../images/chargericon.svg" alt="host"> <span class="host-marker-title">'
+                                + name + '</span><br> <span class="host-marker-stars"> No rating yet! </span>'
+                        } else {
+                            let numOfStars = ''
+
+                            for (let i = 0; i < Math.floor(rating); i++) {
+                                numOfStars = numOfStars + '<i class="fas fa-star"></i>'
+                            }
+
+                            for (let i = 0; i < 5 - Math.floor(rating); i++) {
+                                numOfStars = numOfStars + '<i class="far fa-star"></i>'
+                            }
+                            
+                            html = '<img class="host-marker-img" src="../../images/chargericon.svg" alt="host"> <span class="host-marker-title">'
+                                + name + '</span><br> <span class="host-marker-stars">' + numOfStars + '</span>' + '  ' + rating.toFixed(2)
+                        }
+                    }
+
+                    buildStars(rating)
+
+                    // Builds the popup when user clicks on a host marker.
+                    new mapboxgl.Popup()
+                        .setLngLat(coordinates)
+                        .setHTML(html)
+                        .addTo(map);
+                });
+
+                // Change the cursor to a pointer when the mouse is over the places layer.
+                map.on('mouseenter', 'places', function () {
+                    map.getCanvas().style.cursor = 'pointer';
+                });
+
+                // Change it back to a pointer when it leaves.
+                map.on('mouseleave', 'places', function () {
+                    map.getCanvas().style.cursor = '';
+                });
+            });
+
+            // Uses a for loop to add markers to the map page
+            geojson.forEach( (marker) => {
+
+                // Create a HTML element for each feature
+                var el = document.createElement('div');
+                el.className = 'marker';
+                el.id = marker.properties.charger_id;
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(marker.geometry.coordinates)
+                    .addTo(map);
+            });
+        }
+
+        // Populates the map using geojson object
+        const getMarkers = async () => {
+            const response = await fetch('/markers');
+            const json = await response.json();
+            renderMarkers(json)
+            return json;
+        }
+
+        // Get the markers from node
+        getMarkers()
+
+        // Create a popup, but don't add it to the map yet.
+        var popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+        });
+
+        // On hover, display markers.
+        map.on('mouseenter', 'places', function(e) {
+            if (window.innerWidth >= 600) {
+                // Change the cursor style as a UI indicator.
+                map.getCanvas().style.cursor = 'pointer';
+            
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var name = e.features[0].properties.name;
+                var rating = e.features[0].properties.rating;
+                var html = undefined;
+            
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                // This function builds the number of stars a charger has based on ratings from the db.
+                const buildStars = (rating) => {
+                    if (rating === 0) {
+                        html = '<img class="host-marker-img" src="../../images/chargericon.svg" alt="host"> <span class="host-marker-title">'
+                            + name + '</span><br> <span class="host-marker-stars"> No rating yet! </span>'
+                    } else {
+                        let numOfStars = ''
+
+                        for (let i = 0; i < Math.floor(rating); i++) {
+                            numOfStars = numOfStars + '<i class="fas fa-star"></i>'
+                        }
+
+                        for (let i = 0; i < 5 - Math.floor(rating); i++) {
+                            numOfStars = numOfStars + '<i class="far fa-star"></i>'
+                        }
+                        
+                        html = '<img class="host-marker-img" src="../../images/chargericon.svg" alt="host"> <span class="host-marker-title">'
+                            + name + '</span><br> <span class="host-marker-stars">' + numOfStars + '</span>' + '  ' + rating.toFixed(2)
+                    }
+                }
+
+                buildStars(rating)
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                popup.setLngLat(coordinates)
+                    .setHTML(html)
+                    .addTo(map);
+            }
+        });
+        
+        // On mouse leave, remove the popup.
+        map.on('mouseleave', 'places', function() {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+    </script>
+</div>

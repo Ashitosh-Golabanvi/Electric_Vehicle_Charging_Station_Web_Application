@@ -1,0 +1,110 @@
+main {
+	background:white;
+}
+
+.wallet {
+	max-width: 100%;
+	width: 450px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 40px 0 rgba(0, 0, 0, 0.19);
+	background-image: linear-gradient(#000000, #000000);
+	border-radius: 25px;
+	color: #FFFFFF;
+	padding-bottom: 20px;
+	margin: 10px auto;
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.wallet:hover {
+	transform: translate(0%, -3%);
+}
+
+.cad {
+	font-size: 20px;
+	padding-right: 5px;
+}
+
+.walletheading {
+	font-size: 22px;
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 20px;
+	padding-bottom: 5px;
+	width: 100%;
+}
+
+.walletbalance {
+	margin-top: 20px;
+	font-size: 60px;
+	color: #fff;
+	text-align: center;
+	display: flex;
+  	flex-wrap: wrap;
+  	justify-content: center;
+  	align-items: center;
+}
+
+.walletimage {
+	text-align: center;
+	width: 85%;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #FFFFFF;
+	margin: 0 auto;
+}
+
+.walletparagraph {
+	font-size: 12px;
+	text-align: center;
+	width: 85%;
+	padding-top: 20px;
+	line-height: 1.5em;
+	padding-bottom: 5px;
+	margin: auto auto 0;
+}
+
+/** Recharge tab */
+.balance-button {
+  font-size: 18pt;
+  display: block;
+  background-color: #CCCCCC;
+  margin: 8px auto;
+  color: #FFFFFF;
+  cursor: pointer;
+	border: 0;
+  border-radius: 8px;
+  padding: 3px 0;
+	width: 400px;
+	max-width: 85vw;
+}
+
+.orange-button-wallet {
+  font-size: 13pt;
+  display: block;
+  background-color: #000000;
+  margin: 8px auto;
+  color: #FFFFFF;
+  cursor: pointer;
+	border: 0;
+  border-radius: 8px;
+  padding: 8px 0;
+	width: 400px;
+	max-width: 85vw;
+}
+
+.orange-button-wallet:hover {
+  background-color: #D45125;
+}
+
+.balance-button:hover {
+	background-color: #9A9A9A;
+	color: white;
+}
+
+.balance-button-selected {
+	background-image: linear-gradient(#189b5d, #1ec778);
+    color: white;
+}
+
+.balance-button-selected:hover {
+    background-image: linear-gradient(#168a54, #1cb36c);
+}

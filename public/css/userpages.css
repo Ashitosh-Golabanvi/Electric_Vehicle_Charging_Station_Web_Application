@@ -1,0 +1,199 @@
+main {
+    background-color: #FFFFFF;
+}
+.col-10, .col-11, .col-12 {
+    margin: 0 auto;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+#wrapper {
+    background-color: #FFFFFF;
+    margin: 20px auto 28px;
+    color: #3D3D3D;
+}
+
+/** Headings */
+.outer-header {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0px;
+    color: #3D3D3D;
+}
+.outer-subheader {
+    font-size: 1.25rem;
+    margin: 0px;
+    color: #3D3D3D;
+}
+.inner-header {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 3px auto;
+    color: #3D3D3D;
+}
+.inner-subheader {
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin: 3px auto;
+    color: #3D3D3D;
+    visibility: hidden;
+}
+.header-number {
+    font-size: 1.6rem;
+    color: #999999;
+}
+
+/** Tabs */
+#tabs-wrapper {
+    width: 100%;
+    margin: 20px auto 5px;
+}
+
+.tab-button {
+    font-weight: 700;
+    margin-right: 4vw;
+    color: #555555;
+    cursor: pointer;
+}
+.tab-button:hover {
+    color: #000000;
+}
+.tab-button:hover {
+    color: #000000;
+}
+#tab-content {
+    min-height: 256px;
+    padding: 24px 12px;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+.tab-section-content {
+    margin-bottom: 24px;
+}
+.tab-section-data {
+    margin: 12px auto;
+    max-width: 92%;
+}
+.no-data{
+    height: 10em;
+    width: 100%;
+    text-align: center;
+    padding: 70px 0;
+    border-radius: 15px;
+    margin: 0 auto;
+}
+.no-data p{
+    color: #3D3D3D;
+    font-style: italic;
+}
+
+/** Cards */
+.card-panel {
+    margin: 8px 1%;
+    padding: 12px 10px 14px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0px 2px 6px 0px rgb(0, 0, 0, 0.2);
+    line-height: 1.5em;
+    text-align: left;
+}
+.card-header {
+    font-size: 1.5rem;
+}
+.green-card {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+.dark-green-card {
+    background-color: #189b5d;
+    color: #FFFFFF;
+}
+.orange-card {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+.dark-orange-card {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+.price-card-text-wrapper {
+    margin-top: 2px;
+    float: right;
+    text-align: right;
+    line-height: 1.4em;
+}
+.price-card-text-lg {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+.price-card-text-sm {
+    font-size: 1.2em;
+    font-weight: 500;
+    text-align: right;
+}
+.card-text-lg {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+.card-text-md {
+    font-size: 1em;
+    font-weight: 500;
+}
+.card-text-sm {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+/** Review Styling */
+.form-group label {
+    float: left;
+}
+#comments {
+    width: 100%;
+    height: 10vw;
+    min-height: 2em;
+    margin-bottom: 4px;
+}
+#reviewDetails {
+    width: auto;
+}
+.review-star {
+    color: #F05A29;
+}
+
+/** Completed Booking Styling*/
+.completedBooking:hover {
+    background-color: #000000;
+    color:white;
+    cursor: pointer;
+}
+
+.left-labelled-input {
+    border-top-left-radius: 0px;
+}
+.left-labelled-input-full {
+    border-top-left-radius: 0px;
+}
+
+/** Media queries */
+@media only screen and (min-width: 768px){
+    #wrapper {
+        width: 80%;
+    }
+    #reviewDetails{
+        max-width: 100% !important;
+    }
+    .card-panel {
+        flex: 0 0 48% !important;
+        max-width: 48% !important;
+    }
+    .price-card-text-wrapper {
+        margin-top: 2px;
+        line-height: 1.2em;
+    }
+    .price-card-text-lg {
+        font-size: 1.25em;
+    }
+    .price-card-text-sm {
+        font-size: 1em;
+    }
+}

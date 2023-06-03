@@ -1,0 +1,36 @@
+.outer-header {
+	margin-bottom: 20px;
+}
+.profile-input {
+	background-color: inherit;
+}
+.notif-label {
+	width: unset;
+	font-size: 12pt;
+	display: inline;
+}
+.small-btn {
+	margin: 36px auto 18px;
+}
+#save-btn {
+	display: none;
+}
+.tab-section-content {
+	margin-bottom: 36px;
+	padding-top: 18px;
+	width: 600px;
+	max-width: 85vw;
+}
+.inner-header, #notif-settings-form {
+	text-align: center;
+}
+
+/** Media queries */
+@media only screen and (min-width: 768px){
+	.notif-label {
+		font-size: 12pt;
+	}
+	.small-btn {
+		width: 60%;
+	}
+}

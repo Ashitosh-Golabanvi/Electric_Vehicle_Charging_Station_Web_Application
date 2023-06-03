@@ -1,0 +1,92 @@
+.charger-button{
+    height: 256px;
+    font-size: 1.15rem;
+    margin: 0px auto 16px;
+    max-width: 328px;
+}
+.accept-decline-wrapper > button {
+    font-size: 12pt;
+    width: calc(50% - 4px);
+    border-radius: 8px;
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+.booking-accept-button {
+    float: left;
+    margin-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}   
+.booking-decline-button {
+    float: right;
+    margin-left: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+#new-charger-form, #edit-charger-form {
+    width: 100%;
+}
+#charger-level, #charger-type{ 
+    color: #464648;
+}
+#charger-rate {
+    width: calc(100% - 18px);
+    padding: 3px 8px 3px 2px;
+    float: right;
+}
+#charger-rate-input {
+    width: calc(100% - 18px);
+    padding: 3px 8px 3px 2px;
+    float: right;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: 0px;
+}
+
+.dollar-symbol {
+    padding: 3px 0px 3px 8px;
+    width: 18px;
+    float: left;
+    margin: 0px;
+    border-bottom: 1px solid #464648;
+    border-top-left-radius: 4px !important;
+    background-color: inherit;
+}
+.dollar-symbol-full {
+    padding: 3px 0px 3px 8px;
+    width: 18px;
+    float: left;
+    margin: 0px;
+    border: 1px solid #464648;
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+    border-right: 0px;
+    background-color: white;
+}
+.form-input:focus + .dollar-symbol{
+    padding: 3px 0px 3px 8px;
+    border-bottom: 1.4px solid #1DBF73;
+}
+.form-input-full:focus + .dollar-symbol-full{
+    padding: 3px 0px 3px 8px;
+    border: 1.4px solid #1DBF73;
+    border-right: 0px;
+}
+#new-charger-plus {
+    font-size: 56pt;
+}
+@media only screen and (max-width: 576px) {
+    .charger-button {
+        height: 202px;
+    }
+    .accept-decline-wrapper > button {
+        font-size: 10pt;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 388px) {
+    .accept-icon, .reject-icon{
+        display: block;
+    }
+}

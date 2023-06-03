@@ -1,0 +1,41 @@
+.headerimagecontainer{
+    position: relative;
+}
+
+.headerimage{
+    max-width:100%;
+    max-height:100%;
+}
+
+.page_contact {
+    padding: 20px 0;
+    background:#fff;
+    padding-bottom: 30px;
+}
+
+.content_box_contact {
+    color: #4D4D4D;
+    width: 850px;
+    max-width: 85vw;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+h1 {
+    font-size: 34px;
+    color: #4D4D4D;
+    margin: 0 auto;
+    padding-bottom: 5vh;
+    font-weight: bold;
+    max-width: 90vw;
+}
+
+#email-link {
+    text-decoration: none;
+    color: #1EBF73;
+}
+
+#email-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
