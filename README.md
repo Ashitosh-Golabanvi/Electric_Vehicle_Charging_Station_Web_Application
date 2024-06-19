@@ -1,5 +1,6 @@
 **Required Technologies:**
 * Node-Js.
+* Mongo-DB. 
 
 
 **Execution steps:**
